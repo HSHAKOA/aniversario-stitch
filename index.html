@@ -89,7 +89,7 @@
       display: none;
       margin-top: 25px;
       padding: 25px;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       max-width: 85%;
@@ -107,7 +107,6 @@
       width: 260px;
     }
 
-    /* Contagem regressiva */
     #countdown-container {
       position: fixed;
       inset: 0;
@@ -130,7 +129,6 @@
       margin-top: 20px;
     }
 
-    /* Corações */
     .hearts {
       position: absolute;
       inset: 0;
@@ -180,20 +178,17 @@
   </style>
 </head>
 <body>
-  <!-- Tela de contagem regressiva -->
   <div id="countdown-container">
     <div id="countdown">3</div>
     <div class="countdown-text">Preparando uma surpresa mágica...</div>
   </div>
 
-  <!-- Fundos decorativos -->
   <div class="stitch-pattern"></div>
   <div class="overlay-decor"></div>
   <div class="hearts" id="hearts"></div>
 
-  <!-- Conteúdo principal -->
   <img src="https://i.pinimg.com/originals/0e/7e/ee/0e7eee396eb5c1b40cf0b06c4d9f1411.png" alt="Stitch feliz" class="stitch-img">
-  <h1>Feliz Aniversário, [Nome Aqui]!</h1>
+  <h1>Feliz Aniversário, Milena!</h1>
   <div class="birthday-message">
     Hoje é o seu dia, e só quero te ver sorrindo!<br>
     Clique abaixo para ler uma mensagem especial 💜
@@ -205,7 +200,7 @@
   </div>
 
   <audio id="music" controls loop>
-    <source src="Tiee - Moça (Ao Vivo - DVD Samba Pro Meu Povo).mp3" type="audio/mp3">
+    <source src="tiee-moca.mp3" type="audio/mp3">
     Seu navegador não suporta áudio.
   </audio>
 
@@ -221,13 +216,12 @@
         if (count <= 0) {
           clearInterval(interval);
           countdownContainer.style.display = "none";
-          document.getElementById("music").play();
         }
       }, 1000);
     };
 
     const poemLines = [
-      "Hoje é um dia muito especial,", // Você pode trocar esse conteúdo
+      "Hoje é um dia muito especial,",
       "É o dia em que você veio ao mundo",
       "E tornou ele mais bonito e feliz!",
       "Que este novo ano de vida",
@@ -240,8 +234,11 @@
     function showPoem() {
       const container = document.getElementById("poem-container");
       const poemElement = document.getElementById("poem");
+      const music = document.getElementById("music");
+
       if (container.style.display !== "block") {
         container.style.display = "block";
+        music.play(); // Toca a música após o clique
         poemElement.innerHTML = "";
         poemLines.forEach((line, index) => {
           setTimeout(() => {

@@ -4,139 +4,113 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feliz Aniversário!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       height: 100vh;
-      background: linear-gradient(135deg, #6ad1f3 0%, #b3e0f2 50%, #ffffff 100%);
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #a3d8f4, #c3aed6);
+      color: #1a202c;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #2a4365;
+      overflow: hidden;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
 
     .stitch-pattern {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      inset: 0;
       background-image: url('https://www.transparenttextures.com/patterns/stitched-wool.png');
-      opacity: 0.3;
+      opacity: 0.2;
+      z-index: -2;
+    }
+
+    .overlay-decor {
+      position: absolute;
+      inset: 0;
+      background: url('https://cdn.pixabay.com/photo/2020/12/03/15/55/stars-5796832_1280.png') repeat;
+      background-size: 300px;
+      opacity: 0.1;
       z-index: -1;
     }
-    
+
+    h1 {
+      font-size: 2.5em;
+      color: #3d3d7c;
+      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+      margin-bottom: 10px;
+    }
+
     .stitch-img {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: auto;
       margin-bottom: 20px;
       animation: bounce 2s infinite;
     }
-    
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-15px); }
     }
-    
+
+    .birthday-message {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+      color: #4a5568;
+    }
+
     .poem-button {
-      background-color: #2a4365;
+      background: #7f9cf5;
       color: white;
       border: none;
-      padding: 12px 25px;
+      padding: 14px 30px;
       font-size: 1.2em;
+      border-radius: 30px;
       cursor: pointer;
-      margin: 15px 0;
-      border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: all 0.3s;
+      transition: all 0.3s ease;
     }
-    
+
     .poem-button:hover {
-      background-color: #3c5a7d;
+      background: #5a7eea;
       transform: scale(1.05);
     }
-    
+
     .poem-container {
       display: none;
-      margin-top: 20px;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 80%;
+      margin-top: 25px;
+      padding: 25px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 85%;
     }
-    
-    .poem {
+
+    .poem p {
       font-style: italic;
       font-size: 1.2em;
-      color: #2a4365;
-      line-height: 1.6;
+      margin: 8px 0;
+      color: #2d3748;
     }
-    
-    h1 {
-      color: #2a4365;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 10px;
-    }
-    
+
     audio {
       margin-top: 20px;
-      width: 250px;
-    }
-    
-    .birthday-message {
-      margin-top: 20px;
-      font-size: 1.3em;
-      color: #2a4365;
-      font-weight: bold;
-    }
-    
-    .hearts {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff6b6b;
-      transform: rotate(45deg);
-      opacity: 0;
-    }
-    
-    .heart:before, .heart:after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background-color: #ff6b6b;
-      border-radius: 50%;
-      position: absolute;
-    }
-    
-    .heart:before {
-      top: -10px;
-      left: 0;
-    }
-    
-    .heart:after {
-      left: 10px;
-      top: 0;
+      width: 260px;
     }
 
     /* Contagem regressiva */
     #countdown-container {
       position: fixed;
-      width: 100%;
-      height: 100vh;
+      inset: 0;
       background: #2a4365;
       color: white;
       font-size: 5em;
@@ -146,15 +120,62 @@
       justify-content: center;
       z-index: 9999;
     }
-    
+
     #countdown {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-shadow: 0 0 10px #6ad1f3;
+      text-shadow: 0 0 12px #a3d8f4;
     }
-    
+
     .countdown-text {
       font-size: 0.5em;
       margin-top: 20px;
+    }
+
+    /* Corações */
+    .hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff6b6b;
+      transform: rotate(45deg);
+      opacity: 0.8;
+      animation: float 5s linear forwards;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: inherit;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -162,40 +183,38 @@
   <!-- Tela de contagem regressiva -->
   <div id="countdown-container">
     <div id="countdown">3</div>
-    <div class="countdown-text">Preparando uma surpresa especial...</div>
+    <div class="countdown-text">Preparando uma surpresa mágica...</div>
   </div>
 
-  <!-- Conteúdo principal -->
+  <!-- Fundos decorativos -->
   <div class="stitch-pattern"></div>
+  <div class="overlay-decor"></div>
   <div class="hearts" id="hearts"></div>
-  
+
+  <!-- Conteúdo principal -->
   <img src="https://i.pinimg.com/originals/0e/7e/ee/0e7eee396eb5c1b40cf0b06c4d9f1411.png" alt="Stitch feliz" class="stitch-img">
-  
-  <h1>Feliz Aniversário, Renan Viado!</h1>
-  
+  <h1>Feliz Aniversário, [Nome Aqui]!</h1>
   <div class="birthday-message">
-    Hoje é o seu dia e quero te fazer feliz!<br>
-    Clique no botão para receber uma mensagem especial.
+    Hoje é o seu dia, e só quero te ver sorrindo!<br>
+    Clique abaixo para ler uma mensagem especial 💜
   </div>
-  
   <button class="poem-button" onclick="showPoem()">Abrir Mensagem Especial</button>
-  
+
   <div class="poem-container" id="poem-container">
     <div class="poem" id="poem"></div>
   </div>
-  
+
   <audio id="music" controls loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-    Seu navegador não suporta o elemento de áudio.
+    <source src="URL-DA-SUA-MUSICA.mp3" type="audio/mp3">
+    Seu navegador não suporta áudio.
   </audio>
-  
+
   <script>
-    // Contagem regressiva
     let count = 3;
     const countdownElement = document.getElementById("countdown");
     const countdownContainer = document.getElementById("countdown-container");
-    
-    function startCountdown() {
+
+    window.onload = function () {
       const interval = setInterval(() => {
         count--;
         countdownElement.innerText = count;
@@ -205,14 +224,10 @@
           document.getElementById("music").play();
         }
       }, 1000);
-    }
-    
-    // Inicia a contagem assim que a página carregar
-    window.onload = startCountdown;
-    
-    // Poema e mensagem especial
+    };
+
     const poemLines = [
-      "Hoje é um dia muito especial,",
+      "Hoje é um dia muito especial,", // Você pode trocar esse conteúdo
       "É o dia em que você veio ao mundo",
       "E tornou ele mais bonito e feliz!",
       "Que este novo ano de vida",
@@ -221,64 +236,45 @@
       "Você merece todo o amor do mundo!",
       "Feliz Aniversário! ❤️"
     ];
-    
+
     function showPoem() {
       const container = document.getElementById("poem-container");
       const poemElement = document.getElementById("poem");
-      
-      // Mostra o container se estiver escondido
       if (container.style.display !== "block") {
         container.style.display = "block";
         poemElement.innerHTML = "";
-        
-        // Adiciona cada linha do poema com um pequeno atraso
         poemLines.forEach((line, index) => {
           setTimeout(() => {
             const p = document.createElement("p");
             p.textContent = line;
             poemElement.appendChild(p);
-            
-            // Cria corações flutuantes
             createHearts();
-          }, index * 800);
+          }, index * 700);
         });
       }
     }
-    
-    // Cria corações flutuantes
+
     function createHearts() {
       const heartsContainer = document.getElementById("hearts");
       const heart = document.createElement("div");
       heart.className = "heart";
-      
-      // Posição aleatória
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = Math.random() * 100 + "vh";
-      
-      // Tamanho aleatório
-      const size = Math.random() * 20 + 10;
+
+      const size = Math.random() * 15 + 15;
       heart.style.width = size + "px";
       heart.style.height = size + "px";
-      
-      // Cor aleatória (azuis e rochos)
-      const colors = ["#6ad1f3", "#b3e0f2", "#ff6b6b", "#ffb8b8"];
-      heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      heart.querySelector(":before").style.backgroundColor = heart.style.backgroundColor;
-      heart.querySelector(":after").style.backgroundColor = heart.style.backgroundColor;
-      
-      // Animação
-      heart.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
-      
+
+      const colors = ["#ff6b6b", "#ffb6b6", "#a3d8f4", "#c3aed6"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.backgroundColor = color;
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = Math.random() * 100 + "vh";
+
       heartsContainer.appendChild(heart);
-      
-      // Remove o coração após a animação
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      setTimeout(() => heart.remove(), 6000);
     }
-    
-    // Adiciona alguns corações periodicamente
-    setInterval(createHearts, 300);
+
+    setInterval(createHearts, 400);
   </script>
 </body>
 </html>
